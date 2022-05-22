@@ -1,5 +1,6 @@
 package com.cloud.collection.service.generic.impl;
 
+import com.cloud.collection.exception.notfound.ItemNotFoundException;
 import com.cloud.collection.models.item.generic.Item;
 import com.cloud.collection.repository.item.generic.ItemGenericRepo;
 import com.cloud.collection.service.generic.ItemGenericService;
@@ -26,8 +27,8 @@ public class ItemGenericServiceImpl <T extends Item> implements ItemGenericServi
     }
 
     @Override
-    public Optional<T> findById(Long itemId) throws Exception {
-        return genericRepo.findById(itemId);
+    public T findById(Long itemId) {
+        return genericRepo.findById(itemId).orElseThrow(ItemNotFoundException::new);
     }
 
     @Override

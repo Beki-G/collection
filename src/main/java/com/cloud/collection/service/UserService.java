@@ -2,6 +2,7 @@ package com.cloud.collection.service;
 
 import com.cloud.collection.dto.request.CreateUser;
 import com.cloud.collection.dto.response.UserInfo;
+import com.cloud.collection.exception.notfound.UserNotFoundException;
 import com.cloud.collection.models.enums.UserType;
 import com.cloud.collection.models.user.AdminUser;
 import com.cloud.collection.models.user.User;
@@ -12,7 +13,6 @@ import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
-import org.webjars.NotFoundException;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -48,13 +48,13 @@ public class UserService {
     }
 
     public UserInfo getUserInfoById(Long userId){
-        User user = repository.getById(userId);
+        User user = repository.findById(userId).orElseThrow(UserNotFoundException::new);
         return mapper.userClassToDto(user);
     }
 
-    public User getUserById(Long userId) throws Exception {
+    public User getUserById(Long userId) {
         log.info("User Id: {}", userId);
-        User use =  repository.findById(userId).orElseThrow(Exception::new);
+        User use =  repository.findById(userId).orElseThrow(UserNotFoundException::new);
         log.info("User retrieved: {}", use);
         return use;
     }

@@ -9,7 +9,7 @@ public interface ItemGenericService<T extends Item> {
 
     Optional<T> findByName(String name) throws Exception;
 
-    Optional<T> findById(Long itemId) throws Exception;
+    T findById(Long itemId);
 
     Boolean deleteById(Long itemid) throws Exception;
 

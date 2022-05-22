@@ -9,7 +9,7 @@ public interface ItemGenericController<T extends Item> {
 
     Optional<T> findByItemName(@PathVariable String itemName);
 
-    Optional<T> findById(@PathVariable Long itemId) ;
+    T findById(@PathVariable Long itemId) ;
 
     Boolean deleteById(@PathVariable Long itemId) ;
 

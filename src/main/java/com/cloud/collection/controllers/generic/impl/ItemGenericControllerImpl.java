@@ -30,14 +30,9 @@ public class ItemGenericControllerImpl<T extends Item> implements ItemGenericCon
     }
 
     @Override
-    @GetMapping("/{itemId}")
-    public Optional<T> findById(@PathVariable Long itemId) {
-        try{
-            return genericService.findById(itemId);
-        }catch (Exception e){
-            e.printStackTrace();
-            return Optional.empty();
-        }
+    @GetMapping("/id/{itemId}")
+    public T findById(@PathVariable Long itemId) {
+        return genericService.findById(itemId);
     }
 
     @Override
