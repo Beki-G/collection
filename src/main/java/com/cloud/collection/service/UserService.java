@@ -36,7 +36,6 @@ public class UserService {
             log.info("New User: {}", createdUser);
             return mapper.userClassToDto(createdUser);
         }
-
         if(Objects.equals(newUser.getRole(), UserType.ADMINISTRATOR.getType())){
             AdminUser mappedAdmin = mapper.adminUserDtotoClass(newUser);
             AdminUser createdAdmin = adminRepo.save(mappedAdmin);
@@ -48,6 +47,7 @@ public class UserService {
     }
 
     public UserInfo getUserInfoById(Long userId){
+        log.info("Get UserInfo By ID: {}", userId);
         User user = repository.findById(userId).orElseThrow(UserNotFoundException::new);
         return mapper.userClassToDto(user);
     }

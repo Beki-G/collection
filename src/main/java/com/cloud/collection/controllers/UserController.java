@@ -21,10 +21,11 @@ public class UserController {
 
     @GetMapping("/{userId}")
     public UserInfo getById(@PathVariable Long userId){
+        log.info("Hit UserController get by id: {}", userId);
         return service.getUserInfoById(userId);
     }
 
-    @GetMapping("/{userName}")
+    @GetMapping("/username/{userName}")
     public UserInfo getByUsername(@PathVariable String userName){
         return service.getUserByUsername(userName);
     }
